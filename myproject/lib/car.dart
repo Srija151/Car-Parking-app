@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'UserParkedPage.dart'; // Importing the UserParkedPage.dart file
+import 'UserParkedPage.dart';
+import 'OwnerInformationPage.dart';
 
 class CarParkingUI extends StatefulWidget {
   @override
@@ -7,17 +8,14 @@ class CarParkingUI extends StatefulWidget {
 }
 
 class _CarParkingUIState extends State<CarParkingUI> {
-  int numSlots = 5; // Number of parking slots
-  List<bool> parkingSlots =
-      List.generate(5, (index) => false); // Initialize slots as empty
-  List<String?> owners = List.filled(5, null); // Initialize owners list with null
+  int numSlots = 5;
+  List<bool> parkingSlots = List.generate(5, (index) => false);
+  List<String?> owners = List.filled(5, null);
 
-  int? selectedSlot; // To store the selected slot
-
-  DateTime? parkedTime; // To store the time when the car is parked
+  int? selectedSlot;
+  DateTime? parkedTime;
 
   void toggleParking(int slot) {
-    // Prompt for owner's name
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -37,10 +35,10 @@ class _CarParkingUIState extends State<CarParkingUI> {
                 if (ownerName.isNotEmpty) {
                   setState(() {
                     owners[slot] = ownerName;
-                    parkingSlots[slot] = true; // Mark slot as occupied
-                    parkedTime = DateTime.now(); // Record parked time
+                    parkingSlots[slot] = true;
+                    parkedTime = DateTime.now();
                   });
-                  Navigator.of(context).pop(); // Close the dialog
+                  Navigator.of(context).pop();
                 }
               },
             ),
@@ -55,10 +53,9 @@ class _CarParkingUIState extends State<CarParkingUI> {
       if (!parkingSlots[selectedSlot! - 1]) {
         toggleParking(selectedSlot! - 1);
         setState(() {
-          selectedSlot = null; // Clear selected slot after parking
+          selectedSlot = null;
         });
       } else {
-        // Show a message if the slot is already occupied
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -69,7 +66,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
                 TextButton(
                   child: Text("OK"),
                   onPressed: () {
-                    Navigator.of(context).pop(); // Close the dialog
+                    Navigator.of(context).pop();
                   },
                 ),
               ],
@@ -78,7 +75,6 @@ class _CarParkingUIState extends State<CarParkingUI> {
         );
       }
     } else {
-      // Show a message if no slot is selected
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -89,7 +85,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
               TextButton(
                 child: Text("OK"),
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
+                  Navigator.of(context).pop();
                 },
               ),
             ],
@@ -105,7 +101,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
         context: context,
         builder: (BuildContext context) {
           int minutesParked = DateTime.now().difference(parkedTime!).inMinutes;
-          int charge = minutesParked; // Charge per minute is 1 rupee
+          int charge = minutesParked;
           return AlertDialog(
             title: Text("Confirm"),
             content: Column(
@@ -128,10 +124,10 @@ class _CarParkingUIState extends State<CarParkingUI> {
                 child: Text("Unpark"),
                 onPressed: () {
                   setState(() {
-                    parkingSlots[slot] = false; // Mark slot as empty
-                    owners[slot] = null; // Clear owner's name
+                    parkingSlots[slot] = false;
+                    owners[slot] = null;
                   });
-                  Navigator.of(context).pop(); // Close the dialog
+                  Navigator.of(context).pop();
                 },
               ),
             ],
@@ -139,7 +135,6 @@ class _CarParkingUIState extends State<CarParkingUI> {
         },
       );
     } else {
-      // Show a message if the slot is not occupied
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -150,7 +145,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
               TextButton(
                 child: Text("OK"),
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
+                  Navigator.of(context).pop();
                 },
               ),
             ],
@@ -161,33 +156,100 @@ class _CarParkingUIState extends State<CarParkingUI> {
   }
 
   void navigateToUserParkedPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => UserParkedPage()), // Navigate to UserParkedPage
-    );
+    if (parkingSlots.contains(true)) {
+      int slot = parkingSlots.indexOf(true) + 1;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => UserParkedPage(slotNumber: slot, parkedTime: parkedTime!, charge: DateTime.now().difference(parkedTime!).inMinutes)),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("No Car Parked"),
+            content: Text("No car is currently parked. Please park a car first."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  void navigateToOwnerInformationPage() {
+    if (parkingSlots.contains(true)) {
+      int slot = parkingSlots.indexOf(true) + 1;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OwnerInformationPage(
+            parkingSlots: parkingSlots,
+            owners: owners,
+            parkedTimes: List.generate(numSlots, (index) {
+              return parkingSlots[index] ? parkedTime : null;
+            }),
+            charges: List.generate(numSlots, (index) {
+              return parkingSlots[index]
+                  ? DateTime.now().difference(parkedTime!).inMinutes
+                  : 0;
+            }),
+          ),
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("No Car Parked"),
+            content: Text("No car is currently parked. Please park a car first."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade700, // Set app bar color to pleasant elegant blue
+        backgroundColor: Color.fromARGB(255, 1, 27, 50),
         title: Text(
           'Car Parking System',
-          // Removed style property to make text color black
+          style: TextStyle(color: Colors.white), // Set text color to white
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.directions_car),
-            onPressed: navigateToUserParkedPage, // Navigate to UserParkedPage when car icon is pressed
+            color: Colors.white, // Set icon color to white
+            onPressed: navigateToUserParkedPage,
+          ),
+          IconButton(
+            icon: Icon(Icons.info),
+            color: Colors.white, // Set icon color to white
+            onPressed: navigateToOwnerInformationPage,
           ),
         ],
       ),
       body: Stack(
         children: [
-          // Background image
           Image.asset(
-            'assets/ui2.png', // Background image
+            'assets/ui4.png',
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
@@ -208,7 +270,11 @@ class _CarParkingUIState extends State<CarParkingUI> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                navigateToUserParkedPage(); // Navigate to UserParkedPage when slot image is tapped
+                                if (!parkingSlots[index]) {
+                                  setState(() {
+                                    selectedSlot = index + 1;
+                                  });
+                                }
                               },
                               child: Container(
                                 width: 100,
@@ -218,7 +284,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
                                     color: Colors.black,
                                     width: 2,
                                   ),
-                                  color: parkingSlots[index] ? Colors.green : Colors.red,
+                                  color: parkingSlots[index] ? Colors.green : (selectedSlot == index + 1 ? Colors.blue : Colors.red),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Center(
@@ -276,7 +342,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
                                       selectedSlot = slot;
                                     });
                                     Navigator.of(context).pop();
-                                    parkCar(); // Automatically park the car after selecting the slot
+                                    parkCar();
                                   },
                                   tileColor: selectedSlot == slot ? Color.fromARGB(255, 6, 125, 223) : null,
                                 );

@@ -22,15 +22,18 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Colors.blue.shade700, // Set app bar color to pleasant elegant blue
+        title: Text(
+          widget.title,
+          style: TextStyle(color: Colors.white), // Set app bar text color to white
+        ),
+        backgroundColor: const Color.fromARGB(255, 1, 28, 55), // Set app bar color to pleasant elegant blue
       ),
       body: Stack(
         children: [
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/ui2.png'), // Add background image
+                image: AssetImage('assets/ui4.png'), // Add background image
                 fit: BoxFit.cover, // Cover the entire screen
               ),
             ),
@@ -44,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: MediaQuery.of(context).size.width * 0.8, // Set width to 80% of screen width
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
-                      color: Colors.blue.shade700, // Set register box color to app bar color
+                      color: const Color.fromARGB(255, 2, 29, 57), // Set register box color to app bar color
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -64,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white, // Change text color to white
+                            color: const Color.fromARGB(255, 2, 21, 84), // Change text color to deep blue
                           ),
                         ),
                         SizedBox(height: 20),
@@ -126,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: ElevatedButton(
                             onPressed: _register,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue.shade700, // Set button color to pleasant elegant blue
+                              backgroundColor: Colors.white, // Set button color to white
                               padding: EdgeInsets.symmetric(vertical: 10), // Adjust button padding
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15), // Make button smaller
@@ -138,7 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white, // Set button text color to white
+                                color: const Color.fromARGB(255, 2, 21, 84), // Set button text color to deep blue
                               ),
                             ),
                           ),

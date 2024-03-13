@@ -7,23 +7,35 @@ class ContactUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contact Us'),
-        backgroundColor: Colors.blue.shade700, // Change app bar color to a pleasant elegant blue
+        title: Text(
+          'Contact Us',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
+        backgroundColor: const Color.fromARGB(255, 1, 26, 50), // Change app bar color to a pleasant elegant blue
         actions: [
           IconButton(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home,
+              color: Colors.white, // Set icon color to white
+            ),
             onPressed: () {
               Navigator.pushNamed(context, '/'); // Navigate to the home page
             },
           ),
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: Icon(
+              Icons.info_outline,
+              color: Colors.white, // Set icon color to white
+            ),
             onPressed: () {
               Navigator.pushNamed(context, '/about'); // Navigate to the About Us page
             },
           ),
           IconButton(
-            icon: Icon(Icons.contact_phone), // Add icon for Contact Us page
+            icon: Icon(
+              Icons.contact_phone,
+              color: Colors.white, // Set icon color to white
+            ), // Add icon for Contact Us page
             onPressed: () {}, // No action needed as we are already on the Contact Us page
           ),
         ],
@@ -32,7 +44,7 @@ class ContactUsPage extends StatelessWidget {
         constraints: BoxConstraints.expand(), // Ensure the container takes up the entire screen
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/ui2.png'), // Add background image
+            image: AssetImage('assets/ui4.png'), // Add background image
             fit: BoxFit.cover, // Scale background image to cover the entire screen
           ),
         ),

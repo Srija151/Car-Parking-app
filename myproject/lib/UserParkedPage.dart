@@ -1,64 +1,31 @@
 import 'package:flutter/material.dart';
-import 'dart:async'; // Add this import statement
 
-class UserParkedPage extends StatefulWidget {
-  final int? parkedSlot;
-  final String? ownerName; // Added ownerName parameter
+class UserParkedPage extends StatelessWidget {
+  final int slotNumber;
+  final DateTime parkedTime;
+  final int charge;
 
-  UserParkedPage({this.parkedSlot, this.ownerName}); // Modified constructor
-
-  @override
-  _UserParkedPageState createState() => _UserParkedPageState();
-}
-
-class _UserParkedPageState extends State<UserParkedPage> {
-  late Timer _timer;
-  int _elapsedTime = 0;
-  double _charge = 0.0;
-
-  @override
-  void initState() {
-    super.initState();
-    _startTimer();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void _startTimer() {
-    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
-      setState(() {
-        _elapsedTime++;
-        _calculateCharge();
-      });
-    });
-  }
-
-  void _calculateCharge() {
-    // Assuming charge is 1 rupee per minute
-    _charge = _elapsedTime * 1.0;
-  }
+  UserParkedPage({
+    required this.slotNumber,
+    required this.parkedTime,
+    required this.charge,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade700,
         title: Text(
           'User Parked Page',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-          ),
+          style: TextStyle(color: Colors.white), // Set text color to white
         ),
+        backgroundColor: const Color.fromARGB(255, 2, 28, 54), // Customizing app bar color
+        iconTheme: IconThemeData(color: Colors.white), // Set back arrow color to white
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/ui2.png'),
+            image: AssetImage('assets/ui4.png'), // Add background image
             fit: BoxFit.cover,
           ),
         ),
@@ -66,50 +33,30 @@ class _UserParkedPageState extends State<UserParkedPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (widget.parkedSlot != null && widget.ownerName != null) // Check if slot is booked
-                Column(
-                  children: [
-                    Text(
-                      'Parked Slot: ${widget.parkedSlot}',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'Owner Name: ${widget.ownerName}',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'Elapsed Time: $_elapsedTime minutes',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'Charge: $_charge rupees',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                )
-              else // If slot is not booked
-                Text(
-                  'No slot is booked',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                  ),
+              Text(
+                'Slot Number: $slotNumber',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 8, 5, 5), // Text color
                 ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Parked Time: ${parkedTime.toString()}',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: const Color.fromARGB(255, 9, 2, 2), // Text color
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Charge: $charge',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: const Color.fromARGB(255, 17, 7, 7), // Text color
+                ),
+              ),
             ],
           ),
         ),

@@ -1,3 +1,5 @@
+// main.dart
+
 import 'package:flutter/material.dart';
 import 'about_us.dart';
 import 'contact_us.dart';
@@ -61,33 +63,33 @@ class _MyLoginPageState extends State<MyLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Colors.blue.shade700, // Set app bar color to pleasant blue
+        title: Text(widget.title, style: TextStyle(color: Colors.white)), // Set text color to white
+        backgroundColor: Color.fromARGB(255, 3, 32, 60), // Set app bar color to pleasant blue
         actions: [
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/'); // Navigate to the home page
             },
-            icon: Icon(Icons.home, color: Colors.black), // Add home icon to the app bar
+            icon: Icon(Icons.home, color: Colors.white), // Set icon color to white
           ),
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/about');
             },
-            icon: Icon(Icons.info_outline, color: Colors.black),
+            icon: Icon(Icons.info_outline, color: Colors.white), // Set icon color to white
           ),
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/contact');
             },
-            icon: Icon(Icons.contact_phone, color: Colors.black),
+            icon: Icon(Icons.contact_phone, color: Colors.white), // Set icon color to white
           ),
         ],
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/ui2.png'),
+            image: AssetImage('assets/ui4.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -99,7 +101,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade700,
+                    color: Color.fromARGB(255, 5, 43, 81),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -113,6 +115,12 @@ class _MyLoginPageState extends State<MyLoginPage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
+                      Icon(
+                        Icons.person,
+                        size: 50,
+                        color: Colors.white,
+                      ),
+                      SizedBox(height: 10),
                       Text(
                         'Login',
                         style: TextStyle(
@@ -142,6 +150,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
                           filled: true,
                           fillColor: Colors.white,
                         ),
+                        style: TextStyle(color: Colors.black), // Set text color to black
                       ),
                       SizedBox(height: 10),
                       TextFormField(
@@ -162,7 +171,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
                       ElevatedButton(
                         onPressed: _login,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade700,
+                          backgroundColor: Colors.white, // Change button color to white
                           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
@@ -173,7 +182,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Color.fromARGB(255, 6, 40, 75), // Change text color to blue
                           ),
                         ),
                       ),

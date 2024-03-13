@@ -7,21 +7,33 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About Us'),
-        backgroundColor: Colors.blue.shade700, // Change app bar color to a pleasant elegant blue
+        title: Text(
+          'About Us',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
+        backgroundColor: Color.fromARGB(255, 1, 22, 43), // Change app bar color to a pleasant elegant blue
         actions: [
           IconButton(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home,
+              color: Colors.white, // Set icon color to white
+            ),
             onPressed: () {
               Navigator.pushNamed(context, '/'); // Navigate to the home page
             },
           ),
           IconButton(
-            icon: Icon(Icons.info_outline), // Add icon for About Us page
+            icon: Icon(
+              Icons.info_outline,
+              color: Colors.white, // Set icon color to white
+            ), // Add icon for About Us page
             onPressed: () {}, // No action needed as we are already on the About Us page
           ),
           IconButton(
-            icon: Icon(Icons.contact_mail),
+            icon: Icon(
+              Icons.contact_mail,
+              color: Colors.white, // Set icon color to white
+            ),
             onPressed: () {
               Navigator.pushNamed(context, '/contact'); // Navigate to the Contact Us page
             },
@@ -32,7 +44,7 @@ class AboutUsPage extends StatelessWidget {
         constraints: BoxConstraints.expand(), // Ensure the container takes up the entire screen
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/ui2.png'),
+            image: AssetImage('assets/ui4.png'),
             fit: BoxFit.cover, // Scale background image to cover the entire screen
           ),
         ),
