@@ -12,6 +12,15 @@ class ContactUsPage extends StatelessWidget {
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
         backgroundColor: const Color.fromARGB(255, 1, 26, 50), // Change app bar color to a pleasant elegant blue
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white, // Set icon color to white
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           IconButton(
             icon: Icon(

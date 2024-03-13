@@ -204,22 +204,17 @@ class _CarParkingUIState extends State<CarParkingUI> {
         ),
       );
     } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("No Car Parked"),
-            content: Text("No car is currently parked. Please park a car first."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("OK"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
+      // Navigate to OwnerInformationPage with empty data
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OwnerInformationPage(
+            parkingSlots: List.filled(numSlots, false),
+            owners: List.filled(numSlots, null),
+            parkedTimes: List.filled(numSlots, null),
+            charges: List.filled(numSlots, 0),
+          ),
+        ),
       );
     }
   }

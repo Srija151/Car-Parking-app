@@ -27,6 +27,13 @@ class _RegisterPageState extends State<RegisterPage> {
           style: TextStyle(color: Colors.white), // Set app bar text color to white
         ),
         backgroundColor: const Color.fromARGB(255, 1, 28, 55), // Set app bar color to pleasant elegant blue
+        // Change arrow color to white
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Stack(
         children: [
@@ -62,12 +69,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        Icon(
+                          Icons.person,
+                          color: Colors.white, // Change icon color to white
+                          size: 40,
+                        ),
+                        SizedBox(height: 10),
                         Text(
                           'Register',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 2, 21, 84), // Change text color to deep blue
+                            color: Colors.white, // Change text color to white
                           ),
                         ),
                         SizedBox(height: 20),
