@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:myproject/car.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key, required this.title}) : super(key: key);
+  const RegisterPage({super.key, required this.title});
 
   final String title;
 
@@ -10,13 +13,12 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
-
-  void _register() {
-    // Implement registration logic here
-  }
+  final username = TextEditingController();
+  final password = TextEditingController();
+  final confirmPassword = TextEditingController();
+  
+  final formKey = GlobalKey<FormState>();
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +26,11 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.white), // Set app bar text color to white
+          style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 1, 28, 55), // Set app bar color to pleasant elegant blue
-        // Change arrow color to white
+        backgroundColor: const Color.fromARGB(255, 1, 28, 55),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -38,10 +39,10 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/ui4.png'), // Add background image
-                fit: BoxFit.cover, // Cover the entire screen
+                image: AssetImage('assets/ui4.png'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -51,17 +52,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Center(
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8, // Set width to 80% of screen width
+                    width: MediaQuery.of(context).size.width * 0.8,
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 2, 29, 57), // Set register box color to app bar color
+                      color: const Color.fromARGB(255, 2, 29, 57),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 3,
                           blurRadius: 7,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -69,92 +70,119 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
+                        const Icon(
                           Icons.person,
-                          color: Colors.white, // Change icon color to white
+                          color: Colors.white,
                           size: 40,
                         ),
-                        SizedBox(height: 10),
-                        Text(
+                        const SizedBox(height: 10),
+                        const Text(
                           'Register',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white, // Change text color to white
+                            color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Container(
-                          margin: EdgeInsets.only(bottom: 10),
+                          margin: const EdgeInsets.only(bottom: 10),
                           child: TextFormField(
-                            controller: _usernameController,
-                            style: TextStyle(color: Colors.black), // Set text color to black
+                            controller: username,
+                            style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                               labelText: 'Username',
-                              labelStyle: TextStyle(color: Colors.black), // Set label color to black
+                              labelStyle: const TextStyle(color: Colors.black),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               filled: true,
                               fillColor: Colors.white,
-                              prefixIcon: Icon(Icons.person, color: Colors.black), // Add icon for username
+                              prefixIcon: const Icon(Icons.person, color: Colors.black),
                             ),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(bottom: 10),
+                          margin: const EdgeInsets.only(bottom: 10),
                           child: TextFormField(
-                            controller: _passwordController,
+                            controller: password,
                             obscureText: true,
-                            style: TextStyle(color: Colors.black), // Set text color to black
+                            style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              labelStyle: TextStyle(color: Colors.black), // Set label color to black
+                              labelStyle: const TextStyle(color: Colors.black),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               filled: true,
                               fillColor: Colors.white,
-                              prefixIcon: Icon(Icons.lock, color: Colors.black), // Add icon for password
+                              prefixIcon: const Icon(Icons.lock, color: Colors.black),
                             ),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(bottom: 10),
+                          margin: const EdgeInsets.only(bottom: 10),
                           child: TextFormField(
-                            controller: _confirmPasswordController,
+                            controller: confirmPassword,
                             obscureText: true,
-                            style: TextStyle(color: Colors.black), // Set text color to black
+                            style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                               labelText: 'Confirm Password',
-                              labelStyle: TextStyle(color: Colors.black), // Set label color to black
+                              labelStyle: const TextStyle(color: Colors.black),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               filled: true,
                               fillColor: Colors.white,
-                              prefixIcon: Icon(Icons.lock, color: Colors.black), // Add icon for confirm password
+                              prefixIcon: const Icon(Icons.lock, color: Colors.black),
                             ),
                           ),
                         ),
-                        Container(
-                          width: 150, // Adjust button width
+                        SizedBox(
+                          width: 150,
                           child: ElevatedButton(
-                            onPressed: _register,
+                            onPressed: () async {
+                          final Map<String, dynamic> datasend = {
+                            'UserName': username.text,
+                            'password': password.text,
+                            'confirmPassword': confirmPassword.text,
+                          };
+                          print(datasend);
+                          try {
+                            http.Response response = await http.post(
+                                Uri.parse(
+                                    'http://localhost:8080/Createaccount'),
+                                body: jsonEncode(datasend),
+                                headers: {"Content-Type": "application/json"});
+
+                            if (response.statusCode == 200) {
+                              print('Data sent successfully');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const CarParkingUI()));
+                            } else {
+                              print(
+                                  'Failed to send data: ${response.statusCode}');
+                            }
+                          } catch (e) {
+                            print('Error: $e');
+                          }
+                        },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white, // Set button color to white
-                              padding: EdgeInsets.symmetric(vertical: 10), // Adjust button padding
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 10),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15), // Make button smaller
+                                borderRadius: BorderRadius.circular(15),
                               ),
                               shadowColor: Colors.deepPurpleAccent,
                             ),
-                            child: Text(
+                            child: const Text(
                               'Register',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: const Color.fromARGB(255, 2, 21, 84), // Set button text color to deep blue
+                                color: Color.fromARGB(255, 2, 21, 84),
                               ),
                             ),
                           ),

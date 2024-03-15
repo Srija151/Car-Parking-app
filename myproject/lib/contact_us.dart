@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'about_us.dart'; // Importing the about_us.dart file
-import 'main.dart'; // Importing the main.dart file
+// Importing the about_us.dart file
+// Importing the main.dart file
 
 class ContactUsPage extends StatelessWidget {
+  const ContactUsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Contact Us',
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
         backgroundColor: const Color.fromARGB(255, 1, 26, 50), // Change app bar color to a pleasant elegant blue
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white, // Set icon color to white
           ),
@@ -23,7 +25,7 @@ class ContactUsPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.home,
               color: Colors.white, // Set icon color to white
             ),
@@ -32,7 +34,7 @@ class ContactUsPage extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.info_outline,
               color: Colors.white, // Set icon color to white
             ),
@@ -41,7 +43,7 @@ class ContactUsPage extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.contact_phone,
               color: Colors.white, // Set icon color to white
             ), // Add icon for Contact Us page
@@ -50,8 +52,8 @@ class ContactUsPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        constraints: BoxConstraints.expand(), // Ensure the container takes up the entire screen
-        decoration: BoxDecoration(
+        constraints: const BoxConstraints.expand(), // Ensure the container takes up the entire screen
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/ui4.png'), // Add background image
             fit: BoxFit.cover, // Scale background image to cover the entire screen
@@ -67,8 +69,8 @@ class ContactUsPage extends StatelessWidget {
                   'assets/contactus.png', // Add path to your contact image
                   height: 200, // Adjust image height as needed
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'Contact Us ',
                   style: TextStyle(
                     fontSize: 24,
@@ -76,8 +78,8 @@ class ContactUsPage extends StatelessWidget {
                     color: Colors.black, // Set text color to black
                   ),
                 ),
-                SizedBox(height: 20),
-                Row(
+                const SizedBox(height: 20),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
@@ -91,8 +93,8 @@ class ContactUsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
-                Row(
+                const SizedBox(height: 10),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
@@ -106,8 +108,8 @@ class ContactUsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
-                Row(
+                const SizedBox(height: 10),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(

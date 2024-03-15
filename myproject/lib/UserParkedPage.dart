@@ -5,7 +5,7 @@ class UserParkedPage extends StatelessWidget {
   final DateTime parkedTime;
   final int charge;
 
-  UserParkedPage({
+  const UserParkedPage({super.key, 
     required this.slotNumber,
     required this.parkedTime,
     required this.charge,
@@ -15,15 +15,15 @@ class UserParkedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'User Parked Page',
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
         backgroundColor: const Color.fromARGB(255, 2, 28, 54), // Customizing app bar color
-        iconTheme: IconThemeData(color: Colors.white), // Set back arrow color to white
+        iconTheme: const IconThemeData(color: Colors.white), // Set back arrow color to white
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/ui4.png'), // Add background image
             fit: BoxFit.cover,
@@ -35,26 +35,26 @@ class UserParkedPage extends StatelessWidget {
             children: [
               Text(
                 'Slot Number: $slotNumber',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 8, 5, 5), // Text color
+                  color: Color.fromARGB(255, 8, 5, 5), // Text color
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Parked Time: ${parkedTime.toString()}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
-                  color: const Color.fromARGB(255, 9, 2, 2), // Text color
+                  color: Color.fromARGB(255, 9, 2, 2), // Text color
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Charge: $charge',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
-                  color: const Color.fromARGB(255, 17, 7, 7), // Text color
+                  color: Color.fromARGB(255, 17, 7, 7), // Text color
                 ),
               ),
             ],

@@ -3,6 +3,8 @@ import 'UserParkedPage.dart';
 import 'OwnerInformationPage.dart';
 
 class CarParkingUI extends StatefulWidget {
+  const CarParkingUI({super.key});
+
   @override
   _CarParkingUIState createState() => _CarParkingUIState();
 }
@@ -21,16 +23,16 @@ class _CarParkingUIState extends State<CarParkingUI> {
       builder: (BuildContext context) {
         String ownerName = '';
         return AlertDialog(
-          title: Text("Enter Owner's Name"),
+          title: const Text("Enter Owner's Name"),
           content: TextField(
             onChanged: (value) {
               ownerName = value;
             },
-            decoration: InputDecoration(hintText: "Owner's Name"),
+            decoration: const InputDecoration(hintText: "Owner's Name"),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text("Submit"),
+              child: const Text("Submit"),
               onPressed: () {
                 if (ownerName.isNotEmpty) {
                   setState(() {
@@ -60,11 +62,11 @@ class _CarParkingUIState extends State<CarParkingUI> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Slot Not Available"),
-              content: Text("The selected slot is already occupied. Please choose another slot."),
+              title: const Text("Slot Not Available"),
+              content: const Text("The selected slot is already occupied. Please choose another slot."),
               actions: <Widget>[
                 TextButton(
-                  child: Text("OK"),
+                  child: const Text("OK"),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -79,11 +81,11 @@ class _CarParkingUIState extends State<CarParkingUI> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Select Parking Slot"),
-            content: Text("Please select a parking slot first."),
+            title: const Text("Select Parking Slot"),
+            content: const Text("Please select a parking slot first."),
             actions: <Widget>[
               TextButton(
-                child: Text("OK"),
+                child: const Text("OK"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -103,25 +105,25 @@ class _CarParkingUIState extends State<CarParkingUI> {
           int minutesParked = DateTime.now().difference(parkedTime!).inMinutes;
           int charge = minutesParked;
           return AlertDialog(
-            title: Text("Confirm"),
+            title: const Text("Confirm"),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text("Do you want to unpark the car from Slot ${slot + 1}?"),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text("Parking Duration: $minutesParked minutes"),
                 Text("Charge: $charge rupees"),
               ],
             ),
             actions: <Widget>[
               TextButton(
-                child: Text("Cancel"),
+                child: const Text("Cancel"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text("Unpark"),
+                child: const Text("Unpark"),
                 onPressed: () {
                   setState(() {
                     parkingSlots[slot] = false;
@@ -139,11 +141,11 @@ class _CarParkingUIState extends State<CarParkingUI> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Slot Not Occupied"),
-            content: Text("The selected slot is not occupied."),
+            title: const Text("Slot Not Occupied"),
+            content: const Text("The selected slot is not occupied."),
             actions: <Widget>[
               TextButton(
-                child: Text("OK"),
+                child: const Text("OK"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -167,11 +169,11 @@ class _CarParkingUIState extends State<CarParkingUI> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("No Car Parked"),
-            content: Text("No car is currently parked. Please park a car first."),
+            title: const Text("No Car Parked"),
+            content: const Text("No car is currently parked. Please park a car first."),
             actions: <Widget>[
               TextButton(
-                child: Text("OK"),
+                child: const Text("OK"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -223,19 +225,19 @@ class _CarParkingUIState extends State<CarParkingUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 1, 27, 50),
-        title: Text(
+        backgroundColor: const Color.fromARGB(255, 1, 27, 50),
+        title: const Text(
           'Car Parking System',
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.directions_car),
+            icon: const Icon(Icons.directions_car),
             color: Colors.white, // Set icon color to white
             onPressed: navigateToUserParkedPage,
           ),
           IconButton(
-            icon: Icon(Icons.info),
+            icon: const Icon(Icons.info),
             color: Colors.white, // Set icon color to white
             onPressed: navigateToOwnerInformationPage,
           ),
@@ -291,23 +293,23 @@ class _CarParkingUIState extends State<CarParkingUI> {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             Text(
                               parkingSlots[index]
                                   ? 'Slot ${index + 1} (Occupied by ${owners[index]})'
                                   : 'Slot ${index + 1} (Empty)',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             if (parkingSlots[index])
                               ElevatedButton(
                                 onPressed: () {
                                   unparkCar(index);
                                 },
-                                child: Text('Unpark'),
+                                child: const Text('Unpark'),
                               ),
                           ],
                         ),
@@ -325,7 +327,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Select Parking Slot"),
+                            title: const Text("Select Parking Slot"),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: List.generate(numSlots, (index) {
@@ -339,7 +341,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
                                     Navigator.of(context).pop();
                                     parkCar();
                                   },
-                                  tileColor: selectedSlot == slot ? Color.fromARGB(255, 6, 125, 223) : null,
+                                  tileColor: selectedSlot == slot ? const Color.fromARGB(255, 6, 125, 223) : null,
                                 );
                               }),
                             ),
@@ -347,7 +349,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
                         },
                       );
                     },
-                    child: Text('Park'),
+                    child: const Text('Park'),
                   ),
                 ],
               ),
@@ -360,7 +362,7 @@ class _CarParkingUIState extends State<CarParkingUI> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     title: 'Car Parking App',
     home: CarParkingUI(),
   ));

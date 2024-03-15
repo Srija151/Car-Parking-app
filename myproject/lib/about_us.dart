@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'main.dart'; // Importing the main.dart file
-import 'contact_us.dart'; // Importing the contact_us.dart file
+// Importing the main.dart file
+// Importing the contact_us.dart file
 
 class AboutUsPage extends StatelessWidget {
+  const AboutUsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'About Us',
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
-        backgroundColor: Color.fromARGB(255, 1, 22, 43), // Change app bar color to a pleasant elegant blue
+        backgroundColor: const Color.fromARGB(255, 1, 22, 43), // Change app bar color to a pleasant elegant blue
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white, // Set icon color to white
           ),
@@ -23,7 +25,7 @@ class AboutUsPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.home,
               color: Colors.white, // Set icon color to white
             ),
@@ -32,14 +34,14 @@ class AboutUsPage extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.info_outline,
               color: Colors.white, // Set icon color to white
             ), // Add icon for About Us page
             onPressed: () {}, // No action needed as we are already on the About Us page
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.contact_mail,
               color: Colors.white, // Set icon color to white
             ),
@@ -50,14 +52,14 @@ class AboutUsPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        constraints: BoxConstraints.expand(), // Ensure the container takes up the entire screen
-        decoration: BoxDecoration(
+        constraints: const BoxConstraints.expand(), // Ensure the container takes up the entire screen
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/ui4.png'),
             fit: BoxFit.cover, // Scale background image to cover the entire screen
           ),
         ),
-        child: SingleChildScrollView(
+        child: const SingleChildScrollView(
           padding: EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

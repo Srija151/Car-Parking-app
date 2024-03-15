@@ -6,7 +6,7 @@ class OwnerInformationPage extends StatelessWidget {
   final List<DateTime?> parkedTimes;
   final List<int> charges;
 
-  OwnerInformationPage({
+  const OwnerInformationPage({super.key, 
     required this.parkingSlots,
     required this.owners,
     required this.parkedTimes,
@@ -17,15 +17,15 @@ class OwnerInformationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Information Page',
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
         backgroundColor: const Color.fromARGB(255, 2, 34, 65), // Customizing app bar color
-        iconTheme: IconThemeData(color: Colors.white), // Set arrow color to white
+        iconTheme: const IconThemeData(color: Colors.white), // Set arrow color to white
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/ui4.png'), // Add background image
             fit: BoxFit.cover,
@@ -35,14 +35,14 @@ class OwnerInformationPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Detailed Information',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Expanded(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -55,7 +55,7 @@ class OwnerInformationPage extends StatelessWidget {
                       border: Border.all(color: Colors.grey), // Add border
                       borderRadius: BorderRadius.circular(10), // Add border radius
                     ),
-                    columns: [
+                    columns: const [
                       DataColumn(
                         label: Text('Slot Number'),
                       ),
