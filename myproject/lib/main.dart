@@ -4,6 +4,7 @@ import 'about_us.dart';
 import 'contact_us.dart';
 import 'register.dart';
 import 'car.dart';
+import 'dart:convert';
 
 void main() {
   runApp(const MyApp());
@@ -51,19 +52,29 @@ class _MyLoginPageState extends State<MyLoginPage> {
     final String username = usernameController.text;
     final String password = passwordController.text;
 
-    final Map<String, dynamic> data = {
-      'username': username,
-      'password': password,
-    };
-
+    //String json =
+     //   '{"message":"Hello from flutter","Username":$username,"Password":$password}';
+    //print(json);
+  // final Map<String, dynamic> data = {
+   // "Username": username,
+   // "Password": password,
+  //};
+  String json = jsonEncode({
+  "message": "Hello from flutter",
+  "Username": username,
+  "Password": password,
+});
     try {
       final http.Response response = await http.post(
-        Uri.parse('http://localhost:8080/login'),
-        body: data,
+        Uri.parse('http://localhost:8080/signin'),
+        body: json,
+       // body: json.encode(data),
+        headers: {"Content-Type": "application/json"},
       );
 
       if (response.statusCode == 200) {
         print('Login successful');
+
         Navigator.pushReplacementNamed(context, '/car');
       } else {
         print('Login failed: ${response.body}');
@@ -166,7 +177,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
                         decoration: const InputDecoration(
                           labelText: 'Username',
                           labelStyle: TextStyle(color: Colors.black),
-                          prefixIcon: const Icon(Icons.person, color: Colors.black),
+                          prefixIcon:
+                              const Icon(Icons.person, color: Colors.black),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
@@ -195,7 +207,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
                         onPressed: _login,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),

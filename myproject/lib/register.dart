@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:myproject/car.dart';
+import 'package:myproject/main.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key, required this.title});
@@ -11,6 +12,7 @@ class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
+
 
 class _RegisterPageState extends State<RegisterPage> {
   final username = TextEditingController();
@@ -145,7 +147,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           final Map<String, dynamic> datasend = {
                             'UserName': username.text,
                             'password': password.text,
-                            'confirmPassword': confirmPassword.text,
                           };
                           print(datasend);
                           try {
@@ -160,7 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const CarParkingUI()));
+                                      builder: (context) => const MyApp()));
                             } else {
                               print(
                                   'Failed to send data: ${response.statusCode}');
